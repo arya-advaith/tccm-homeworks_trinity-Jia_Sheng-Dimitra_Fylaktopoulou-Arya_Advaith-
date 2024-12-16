@@ -13,8 +13,8 @@ size_t read_Natoms(FILE* input_file) { //it is the input name given by professor
     int N;
     sscanf(number, "%d", &N); // finds the number of atoms in the file
     printf("Number of Atoms = %d\n", N);
-
-char cartesian[256]; // just a variable to read the rest of the input file. size cannot be less than 50 i // struct cart one[Natoms]; // the one array that holds every coordinate and atomic number of the file!!!
+ return N;
+}
 
 float** malloc_2d(size_t m, size_t n){
  float** a = malloc(m*sizeof(float*));
@@ -32,21 +32,27 @@ float** malloc_2d(size_t m, size_t n){
  return a; 
 }
 
-float** coord = malloc_2d(N, 3);
-float* mass = malloc(5 * N * sizeof(float));
-for (int j = 0; j < N; j++) {
+
+float**  read_molecule(FILE* input_file, size_t N, float** coord, float* mass) {
+
+char cartesian[256]; // just a variable to read the rest of the input file. size cannot be less than 50 i guess.
+
+for (size_t j = 0; j < N; j++) {
         if (fgets(cartesian, sizeof(cartesian), input_file) == NULL) {
             printf("Error reading coordinates and atomic number. Mostly there are more than 4 inputs in a line :/\n");
-            break;
+            return NULL;
         }
         if (sscanf(cartesian, "%f %f %f %f", &coord[j][0], &coord[j][1], &coord[j][2],&mass[j]) != 4) {                                                                                                   printf("Error parsing coordinates and atomic number. Mostly there are more spaces than required :/ we usually ask only for 1 space between the numbers please \n");
-            continue;
+            return NULL;
         }
         printf("%f %f %f with atomic number as %f\n", coord[j][0], coord[j][1], coord[j][2], mass[j]);
     }
+return coord, mass;
+}
 
+float** compute_distance(size_t N, float** coord) {
 printf("\n The distance matrix is given below:\n ");
-float** distance = malloc_2d(N,N);
+float** distance=malloc_2d(N,N);
 for (int i=0;i<N;i++){
 	for (int j=0;j<N;j++){
              distance[i][j] = (coord[i][0]-coord[j][0])*(coord[i][0]-coord[j][0]);
@@ -56,20 +62,13 @@ for (int i=0;i<N;i++){
 	}
  printf("%f %f %f\n",distance[i][0],distance[i][1],distance[i][2]);
 }
-
-
-
-
+return distance;
+}
 
 void free_2d(float** a){
 free(a[0]);
 a[0]=NULL;
 free(a);
-}
-free_2d(coord);
-free_2d(distance);
-free(mass);
-return N;
 }
 
 //int main() {

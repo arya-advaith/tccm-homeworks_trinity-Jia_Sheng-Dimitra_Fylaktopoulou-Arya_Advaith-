@@ -11,8 +11,15 @@ int main() {
         return 1;
     }
    
-   read_Natoms(input_file);
-   fclose(input_file); // important command to close the file
-    
-    return 0;
+size_t N=read_Natoms(input_file);
+float** coord = malloc_2d(N, 3);
+float* mass = malloc(5 * N * sizeof(float));
+coord,mass=read_molecule(input_file,  N,coord, mass);
+fclose(input_file); // important command to close the file
+float** distance = malloc_2d(N,N);
+distance=compute_distance(N,coord);
+free_2d(coord);
+free(mass);
+free_2d(distance);
+return 0;
 }
