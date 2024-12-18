@@ -51,8 +51,10 @@ return coord, mass;
 }
 
 float** compute_distance(size_t N, float** coord) {
+
+float** distance = malloc_2d(N,N);
 printf("\n The distance matrix is given below:\n ");
-float** distance=malloc_2d(N,N);
+
 for (int i=0;i<N;i++){
 	for (int j=0;j<N;j++){
              distance[i][j] = (coord[i][0]-coord[j][0])*(coord[i][0]-coord[j][0]);
@@ -62,6 +64,7 @@ for (int i=0;i<N;i++){
 	}
  printf("%f %f %f\n",distance[i][0],distance[i][1],distance[i][2]);
 }
+printf("\n");
 return distance;
 }
 
@@ -71,15 +74,3 @@ a[0]=NULL;
 free(a);
 }
 
-//int main() {
-  //  FILE* input_file = fopen("inp.txt", "r"); //important command to open the file as a reader "r"
-   // if (input_file == NULL) {
-    //    printf("Error opening file.\n");
-    //    return 1;
-   // }
-
-    //read_Natoms(input_file);
-
-    //fclose(input_file); // important command to close the file
-   // return 0;
-//}
