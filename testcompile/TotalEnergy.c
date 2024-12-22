@@ -103,7 +103,7 @@ double E(double Tvalue, double Vvalue) {
 	double Energy;
 	Energy = Tvalue + Vvalue;
 
-	printf("The total energy E is:%f\n",Energy);
+	printf("The total energy E is:%f\n\n",Energy);
 	return Energy;
 }
 

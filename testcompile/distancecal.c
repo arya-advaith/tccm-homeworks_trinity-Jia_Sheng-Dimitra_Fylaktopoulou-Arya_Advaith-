@@ -5,6 +5,7 @@
 #include "fileopening.c"
 #include "LennardJones.c"
 #include "TotalEnergy.c"
+#include "acceleration.c"
 
 int main() {
     FILE* input_file = fopen("inp.txt", "r"); //important command to open the file as a reader "r"
@@ -54,10 +55,36 @@ double total_energy = V(epsilon, sigma, N, distance);
 	}
 
 
-
 double T_value = T(N, velocity1, mass);
 
+
+double acceleration_value[3][3] = {        // i{x y z}, j{x y z} k{x y z}     atom/acc_direction //later need initialize to 0  first
+	{0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0}
+
+};
+
+double** acceleration = malloc(sizeof(double*) * 3); //allocate 3 pointer space
+for (int i = 0; i < 3; i++) {
+	acceleration[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
+}
+
+// need to manually put value inside
+for (int i = 0; i < 3; i++) {
+	for (int j = 0; j < 3; j++) {
+		acceleration[i][j] = acceleration_value[i][j];
+	}
+
+}
+
+
+
+
 double Total_E_system = E(T_value, total_energy);
+
+
+compute_acc(N, coord, mass, distance, acceleration,epsilon,sigma);
 
 
 free_2d(coord);
