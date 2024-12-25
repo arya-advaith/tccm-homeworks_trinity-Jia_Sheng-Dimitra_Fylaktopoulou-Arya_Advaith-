@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "fileopening.c"
 #include "LennardJones.c"
+#include "2TotalEnergy.c"
 
 int main() {
     FILE* input_file = fopen("inp.txt", "r"); //important command to open the file as a reader "r"
@@ -23,12 +24,14 @@ coord,mass=read_molecule(input_file,  N,coord, mass);
 fclose(input_file); // important command to close the file
 
 float** distance=compute_distance(N,coord);
-
-float total_energy = V(epsilon, sigma, N, distance);
-
+float** velocity = malloc_2d(N,3);
+float pot_energy = V(epsilon, sigma, N, distance);
+float T_value = T(N, velocity, mass);
+ printf("The T value is: %f \n", T_value);
+E(T_value, pot_energy);
 free_2d(coord);
 free(mass);
 free_2d(distance);
-
+free(velocity);
 return 0;
 }
