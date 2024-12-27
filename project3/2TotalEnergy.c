@@ -45,9 +45,9 @@ double T(size_t Natoms,  // Natoms is just variable Natom
 			Tsum += mass[i] * v2_array[i];
 		}
 
-	printf("The Tsum value is : %f\n", Tsum);
+//	printf("The Tsum value is : %f\n", Tsum);
 	Tsum = Tsum * 0.5;
-	printf("The Tsum value is : %f\n", Tsum);
+//	printf("The Tsum value is : %f\n", Tsum);
 
 	//printf("//////////////done function////////////////////\n");
 	return Tsum;
@@ -55,7 +55,7 @@ double T(size_t Natoms,  // Natoms is just variable Natom
 	}
 
 	double E(double Tvalue, double Vvalue) {
-		printf("\nThis function calculate the total energy of the system.\n"); //(change in every loop?)
+	printf("\nThis function calculate the total energy of the system.\n"); //(change in every loop?)
 
 		double Energy;
 		Energy = Tvalue + Vvalue;

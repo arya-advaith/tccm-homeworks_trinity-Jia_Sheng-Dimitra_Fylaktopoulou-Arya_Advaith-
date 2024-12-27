@@ -16,12 +16,12 @@ size_t read_Natoms(FILE* input_file) { //it is the input name given by professor
  return N;
 }
 
-float** malloc_2d(size_t m, size_t n){
- float** a = malloc(m*sizeof(float*));
+double** malloc_2d(size_t m, size_t n){
+ double** a = malloc(m*sizeof(double*));
  if (a == NULL){
   return NULL;
  }
- a[0] = malloc(n*m*sizeof(float));
+ a[0] = malloc(n*m*sizeof(double));
  if (a[0] == NULL) {
   free(a);
   return NULL;
@@ -33,7 +33,7 @@ float** malloc_2d(size_t m, size_t n){
 }
 
 
-float**  read_molecule(FILE* input_file, size_t N, float** coord, float* mass) {
+double**  read_molecule(FILE* input_file, size_t N, double** coord, double* mass) {
 
 char cartesian[256]; // just a variable to read the rest of the input file. size cannot be less than 50 i guess.
 
@@ -42,18 +42,18 @@ for (size_t j = 0; j < N; j++) {
             printf("Error reading coordinates and atomic number. Mostly there are more than 4 inputs in a line :/\n");
             return NULL;
         }
-        if (sscanf(cartesian, "%f %f %f %f", &coord[j][0], &coord[j][1], &coord[j][2],&mass[j]) != 4) {                                                                                                   printf("Error parsing coordinates and atomic number. Mostly there are more spaces than required :/ we usually ask only for 1 space between the numbers please \n");
+        if (sscanf(cartesian, "%lf %lf %lf %lf", &coord[j][0], &coord[j][1], &coord[j][2],&mass[j]) != 4) {                                                                                                   printf("Error parsing coordinates and atomic number. Mostly there are more spaces than required :/ we usually ask only for 1 space between the numbers please \n");
             return NULL;
         }
-        printf("%f %f %f with atomic number as %f\n", coord[j][0], coord[j][1], coord[j][2], mass[j]);
+//        printf("%lf %lf %lf with atomic number as %lf\n", coord[j][0], coord[j][1], coord[j][2], mass[j]);
     }
 return coord, mass;
 }
 
-float** compute_distance(size_t N, float** coord) {
+double** compute_distance(size_t N, double** coord) {
 
-float** distance = malloc_2d(N,N);
-printf("\n The distance matrix is given below:\n ");
+double** distance = malloc_2d(N,N);
+//printf("\n The distance matrix is given below:\n ");
 
 for (int i=0;i<N;i++){
 	for (int j=0;j<N;j++){
@@ -62,13 +62,13 @@ for (int i=0;i<N;i++){
 	     distance[i][j] = distance[i][j]+(coord[i][2]-coord[j][2])*(coord[i][2]-coord[j][2]);
 	     distance[i][j]=sqrt(distance[i][j]);
 	}
- printf("%f %f %f\n",distance[i][0],distance[i][1],distance[i][2]);
+// printf("%lf %lf %lf\n",distance[i][0],distance[i][1],distance[i][2]);
 }
-printf("\n");
+//printf("\n");
 return distance;
 }
 
-void free_2d(float** a){
+void free_2d(double** a){
 free(a[0]);
 a[0]=NULL;
 free(a);
