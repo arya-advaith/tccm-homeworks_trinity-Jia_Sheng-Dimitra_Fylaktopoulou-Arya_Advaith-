@@ -132,8 +132,6 @@ double Total_E_system = E(T_value, total_energy);  //total_energy = LJ potential
 
 
 
-// -----------------4  Compute the acceleration -------------------------------------------
-compute_acc(N, coord, mass, distance, acceleration2, epsilon, sigma);
 
 
 
@@ -145,11 +143,18 @@ compute_acc(N, coord, mass, distance, acceleration2, epsilon, sigma);
 
 	if (n < 1) {
 		printf("This is the initial acceleration, accele_prev is same value");
+                
+                // -----------------4  Compute the acceleration -------------------------------------------
+                compute_acc(N, coord, mass, distance, acceleration2, epsilon, sigma);    //acceleration2 is acceleration_current
 
 	}
 	else {
 		printf("This is not initial acceleration, acceleration_prev take last acce value");
-		acceleration1 = acceleration2;
+		acceleration1 = acceleration2;    // acceleration_previous = acceleration_current , acceleration take the value before accelertion update
+
+                // -----------------4  Compute the acceleration -------------------------------------------
+                compute_acc(N, coord, mass, distance, acceleration2, epsilon, sigma);    //acceleration2 is acceleration_current
+
 	}
 
 	// -----------------------function Verlet here ------------------------------------------------

@@ -29,11 +29,11 @@ double** Verlet(
 			printf("acceleration_current:%f\n", acceleration_current[i][j]);
 			printf("acceleration_previous:%f\n", acceleration_previous[i][j]);*/
 
-			coord[i][j] = coord[i][j] + (velocity[i][j] * time_step) + (acceleration_current[i][j] * (pow(time_step, 2) / 2));
+			coord[i][j] = coord[i][j] + (velocity[i][j] * time_step) + (acceleration_previous[i][j] * (pow(time_step, 2) / 2));
 			
 
 			// Velocity update
-			velocity[i][j] = velocity[i][j] + 0.5 * (acceleration_current[i][j] + acceleration_previous[i][j]) * time_step;
+			velocity[i][j] = velocity[i][j] + 0.5 * (acceleration_previous[i][j] + acceleration_current[i][j]) * time_step;
 		}
 	}
 
