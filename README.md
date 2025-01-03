@@ -31,27 +31,28 @@ Contains the core code for the simulation, including the files below.
 
 ### 'testcompile3/'
 ## Files
-**'LennardJones.c'**
-**'TotalEnergy.c'**
-**'Verlet.c'**
-**'a.out'**
-**'acceleration.c'**
-**'distancecalc.c'**
-**fileopening.c'**
-**'inp.txt'**
-**'output.xyz'**: contains the results of the simulation runs.
-**'output1.xyz'**: same 
-**writefile.c**: is designed to write atom data (such as coordinates and energy values) to an .xyz file format. Specifically, it appends data to a file called output.xyz
+
+**'LennardJones.c'**,
+**'TotalEnergy.c'**,
+**'Verlet.c'**,
+**'a.out'**,
+**'acceleration.c'**,
+**'distancecalc.c'**,
+**fileopening.c'**,
+**'inp.txt'**,
+**'output.xyz'**: contains the results of the simulation runs,
+**'output1.xyz'**: same, 
+**writefile.c**: is designed to write atom data (such as coordinates and energy values) to an .xyz file format. Specifically, it appends data to a file called output.xyz,
 **'a.out'**: compiled executable for testing
 
 ### 'testcompile/'
 Contains modified code for testing.  The directory includes the files below.
-LennardJones.c
-TotalEnergy.c
-a.out2 days ago
+**'LennardJones.c'**,
+TotalEnergy.c,
+a.out2 days ago,
 acceleration.c,
-distancecal.c
-fileopening.c
+distancecal.c,
+fileopening.c,
 inp.txt
 
 ### 'LICENSE' 
