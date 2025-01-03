@@ -35,75 +35,80 @@ fclose(input_file); // important command to close the file
 // =====================some messy necessary values (initialization) ==============================
 
 //--------------------velocity----------------------------
-	double velocity_value[][3] = {               // dummy velocity value, find a way to store here (initialize to 0 first)
-		{0.0,0.0,0.0} ,   // particle 1: {vx,vy,vz}    // change new velocity here by exp. velociy_value[0][1]= (new value)
-		{0.0,0.0,0.0},    // particle 2: {vx,vy,vz}    // at the end this will be all 0
-		{0.0,0.0,0.0}    // particle 3: {vx,vy,vz}
-	};  // # 3 atoms * 3 velocity direction
+//	double velocity_value[][3] = {               // dummy velocity value, find a way to store here (initialize to 0 first)
+//		{0.0,0.0,0.0} ,   // particle 1: {vx,vy,vz}    // change new velocity here by exp. velociy_value[0][1]= (new value)
+//		{0.0,0.0,0.0},    // particle 2: {vx,vy,vz}    // at the end this will be all 0
+//		{0.0,0.0,0.0}    // particle 3: {vx,vy,vz}
+//	};  // # 3 atoms * 3 velocity direction
+
+double** velocity1=malloc_2d(N, 3);
 
 	//https://youtu.be/-y8FUvRq_88
-	double** velocity1 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
-	for (int i = 0; i < 3; i++) {
-		velocity1[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
-	}
-
-	// need to manually put value inside
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			velocity1[i][j] = velocity_value[i][j];
-		}
-
-	}
+//double** velocity1 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
+	
+//	for (int i = 0; i < 3; i++) {
+//		velocity1[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
+//	}
+//
+//	// need to manually put value inside
+//	for (int i = 0; i < 3; i++) {
+//		for (int j = 0; j < 3; j++) {
+//			velocity1[i][j] = velocity_value[i][j];
+//		}
+//
+//	}
 
 
 //--------------------------- acceleration --------------------
-double acceleration_previous[3][3] = {        // i{x y z}, j{x y z} k{x y z}     atom/acc_direction //later need initialize to 0  first
-	{0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0}
+//double acceleration_previous[3][3] = {        // i{x y z}, j{x y z} k{x y z}     atom/acc_direction //later need initialize to 0  first
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0}
+//
+//};
 
-};
+//double** acceleration1 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
+//for (int i = 0; i < 3; i++) {
+//	acceleration1[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
+//}
 
-double** acceleration1 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
-for (int i = 0; i < 3; i++) {
-	acceleration1[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
-}
+double** acceleration1 = malloc_2d(N, 3);
 
 // need to manually put value inside
-for (int i = 0; i < 3; i++) {
-	for (int j = 0; j < 3; j++) {
-		acceleration1[i][j] = acceleration_previous[i][j];
-	}
-
-}
+//for (int i = 0; i < 3; i++) {
+//	for (int j = 0; j < 3; j++) {
+//		acceleration1[i][j] = acceleration_previous[i][j];
+//	}
+//
+//}
 
 //---------------------------------------------------
 
 
-double acceleration_current[3][3] = {        // i{x y z}, j{x y z} k{x y z}     atom/acc_direction //later need initialize to 0  first
-	{0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0}
+//double acceleration_current[3][3] = {        // i{x y z}, j{x y z} k{x y z}     atom/acc_direction //later need initialize to 0  first
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0}
+//
+//};
 
-};
 
 
-
-double** acceleration2 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
-for (int i = 0; i < 3; i++) {
-	acceleration2[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
-}
+//double** acceleration2 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
+//for (int i = 0; i < 3; i++) {
+//	acceleration2[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
+//}
 
 // need to manually put value inside
-for (int i = 0; i < 3; i++) {
-	for (int j = 0; j < 3; j++) {
-		acceleration2[i][j] = acceleration_current[i][j];
-	}
+//for (int i = 0; i < 3; i++) {
+//	for (int j = 0; j < 3; j++) {
+//		acceleration2[i][j] = acceleration_current[i][j];
+//	}
+//
+//}
 
-}
 
-
-
+double** acceleration2 = malloc_2d(N, 3);
 
 // =====================some messy necessary values ends ==============================
 

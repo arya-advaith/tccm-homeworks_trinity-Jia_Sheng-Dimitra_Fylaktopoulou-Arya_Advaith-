@@ -31,7 +31,7 @@ double Writefile(size_t Natoms,
 	fptr = fopen("output.xyz","a");
 
 	// Natoms
-	fprintf(fptr, "%d", Natoms);fputs("\n", fptr);
+	fprintf(fptr, "%ld", Natoms);fputs("\n", fptr);
 	// Comment: KE, PE, TE
 	fprintf(fptr, "%lf", KE); fputs("\t", fptr);fprintf(fptr, "%lf", PE);fputs("\t", fptr);fprintf(fptr, "%lf", TE);fputs("\n", fptr);
 	//fprintf(fptr, "%d", Natoms);fputs("\t", fptr);fprintf(fptr, "%d", Natoms);fputs("\t", fptr);fputs("\n", fptr);
