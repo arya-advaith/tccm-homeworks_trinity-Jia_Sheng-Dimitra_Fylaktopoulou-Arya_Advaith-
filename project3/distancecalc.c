@@ -4,8 +4,11 @@
 #include <ctype.h>
 #include "fileopening.c"
 #include "LennardJones.c"
-#include "2TotalEnergy.c"
+#include "TotalEnergy.c"
 #include "acceleration.c"
+#include "Verlet.c"
+#include "writefile.c"
+
 
 int main() {
     FILE* input_file = fopen("inp.txt", "r"); //important command to open the file as a reader "r"
@@ -22,61 +25,160 @@ double** coord = malloc_2d(N, 3);
 double* mass = malloc(5 * N * sizeof(double));
 coord,mass=read_molecule(input_file,  N,coord, mass);
 
+
+
 fclose(input_file); // important command to close the file
-printf("Time-Step please:\t");
-double deltaT;
-scanf("%lf",&deltaT);
-double** acceleration = malloc_2d(N,3);
-double** velocity = malloc_2d(N,3);
-double** acc_prev = malloc_2d(N,3);
-double** coord_iter = malloc_2d(N,3);
-double** vel_iter = malloc_2d(N,3);
-double** x = malloc_2d(N,3);
-coord_iter=coord;
-double** delT = malloc_2d(N,3);
-for (int i=0;i<N;i++){
-	for (int j=0;j<N;j++){
-	delT[i][j]=deltaT;
+
+
+
+
+// =====================some messy necessary values (initialization) ==============================
+
+//--------------------velocity----------------------------
+//	double velocity_value[][3] = {               // dummy velocity value, find a way to store here (initialize to 0 first)
+//		{0.0,0.0,0.0} ,   // particle 1: {vx,vy,vz}    // change new velocity here by exp. velociy_value[0][1]= (new value)
+//		{0.0,0.0,0.0},    // particle 2: {vx,vy,vz}    // at the end this will be all 0
+//		{0.0,0.0,0.0}    // particle 3: {vx,vy,vz}
+//	};  // # 3 atoms * 3 velocity direction
+
+double** velocity1=malloc_2d(N, 3);
+
+	//https://youtu.be/-y8FUvRq_88
+//double** velocity1 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
+	
+//	for (int i = 0; i < 3; i++) {
+//		velocity1[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
+//	}
+//
+//	// need to manually put value inside
+//	for (int i = 0; i < 3; i++) {
+//		for (int j = 0; j < 3; j++) {
+//			velocity1[i][j] = velocity_value[i][j];
+//		}
+//
+//	}
+
+
+//--------------------------- acceleration --------------------
+//double acceleration_previous[3][3] = {        // i{x y z}, j{x y z} k{x y z}     atom/acc_direction //later need initialize to 0  first
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0}
+//
+//};
+
+//double** acceleration1 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
+//for (int i = 0; i < 3; i++) {
+//	acceleration1[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
+//}
+
+double** acceleration1 = malloc_2d(N, 3);
+
+// need to manually put value inside
+//for (int i = 0; i < 3; i++) {
+//	for (int j = 0; j < 3; j++) {
+//		acceleration1[i][j] = acceleration_previous[i][j];
+//	}
+//
+//}
+
+//---------------------------------------------------
+
+
+//double acceleration_current[3][3] = {        // i{x y z}, j{x y z} k{x y z}     atom/acc_direction //later need initialize to 0  first
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0},
+//	{0.0, 0.0, 0.0}
+//
+//};
+
+
+
+//double** acceleration2 = malloc(sizeof(double*) * 3); //allocate 3 pointer space
+//for (int i = 0; i < 3; i++) {
+//	acceleration2[i] = malloc(sizeof(double) * 3); // array of pointer box that point to a memory
+//}
+
+// need to manually put value inside
+//for (int i = 0; i < 3; i++) {
+//	for (int j = 0; j < 3; j++) {
+//		acceleration2[i][j] = acceleration_current[i][j];
+//	}
+//
+//}
+
+
+double** acceleration2 = malloc_2d(N, 3);
+
+// =====================some messy necessary values ends ==============================
+
+
+
+for (int n = 0; n < 1000; n++) {     // This is Verlet loop, 1000 steps 
+printf("step:%d\n",n);
+
+// ----------- 1 compute distance function --------------------
+double** distance = compute_distance(N,coord);
+
+
+// -------------2 compute LJ potential ----------------------
+double total_energy = V(epsilon, sigma, N, distance);
+
+
+
+
+// ------------------3 compute total energy (Kinetic) ------------------------------
+double T_value = T(N, velocity1, mass);
+
+
+
+// ------------------3 compute total energy (Total energy) ------------------------------
+double Total_E_system = E(T_value, total_energy);  //total_energy = LJ potential
+
+
+
+
+
+
+
+// =========================5 Verlet part=============================================
+
+
+
+
+	if (n < 1) {
+		printf("This is the initial acceleration, accele_prev is same value");
+                
+                // -----------------4  Compute the acceleration -------------------------------------------
+                compute_acc(N, coord, mass, distance, acceleration2, epsilon, sigma);    //acceleration2 is acceleration_current
+
 	}
+	else {
+		printf("This is not initial acceleration, acceleration_prev take last acce value");
+		acceleration1 = acceleration2;    // acceleration_previous = acceleration_current , acceleration take the value before accelertion update
+
+                // -----------------4  Compute the acceleration -------------------------------------------
+                compute_acc(N, coord, mass, distance, acceleration2, epsilon, sigma);    //acceleration2 is acceleration_current
+
+	}
+
+	// -----------------------function Verlet here ------------------------------------------------
+	coord, velocity1, acceleration1, acceleration2 = Verlet(N, coord, velocity1, acceleration1, acceleration2);
+
+
+// =========================Verlet part end =========================================
+
+
+
+Writefile(N, T_value, total_energy, Total_E_system, coord);
+
 }
 
-for (int i=0;i<1000;i++){
-//printf("The T value is: %f \n", T_value);
 
-vel_iter = velocity;
-x=coord_iter;
-
-printf("Iteration number:  %d\n",i+1);
-**coord_iter = **coord_iter + **(vel_iter*delT) + **(acceleration) * 0.5 * **(delT*delT);
-
-printf("\nNew coordinates is:\n");
-for (int i=0;i<N;i++){
-printf("%lf %lf %lf\n",coord_iter[i][0],coord_iter[i][1],coord_iter[i][2]);
-}
-printf("\n");
-
-//if (x == coord_iter){
-//break;}
-
-
-double** distance=compute_distance(N,coord);
-double pot_energy = V(epsilon, sigma, N, distance);
-double T_value = T(N, velocity, mass);
-double total=E(T_value, pot_energy);
-compute_acc(N, coord, mass, distance, acceleration, epsilon, sigma);
-**vel_iter = **vel_iter + (0.5)*(**acceleration+**acc_prev)*(**delT);
-acc_prev = acceleration;
-
-for (int i=0;i<N;i++){
-printf("%lf %lf %lf\n",vel_iter[i][0],vel_iter[i][1],vel_iter[i][2]);
-}
-printf("\n");
-
-free_2d(distance);
-}
 
 free_2d(coord);
 free(mass);
-free_2d(velocity);
+//free_2d(distance);
+
 return 0;
 }
