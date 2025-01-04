@@ -3,6 +3,17 @@
 ## Project Description
 The project simulates molecular dynamics using classical mechanics. The program calculates the total energy of a system atoms based on their atomic coordinates, masses and veocities. It includes calculations for kinetic energy, potential energy (via Lennard Jones potential), and total energy of the system. The simulation can be used to study the behavior of atoms and their interactions in molecular dynamics systems.
 
+
+To compile this code using a gnu C/C++ compiler, and create an executable called 'MD.exe' in the Linux environment, type
+
+`make`
+
+Then, to run the program, type
+
+`./MD.exe`
+
+
+
 ## Directory Structure
 ### 'project1/'
 This directory contains files for project 1 not related to our project (project 3).
