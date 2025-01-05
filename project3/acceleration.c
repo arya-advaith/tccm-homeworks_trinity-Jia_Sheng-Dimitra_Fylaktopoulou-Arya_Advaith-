@@ -9,7 +9,7 @@ void compute_acc(
 	double sigma) {
 
 
-         printf("This function calculate the acceleration.\n");	
+         //printf("This function calculate the acceleration.\n");	
 
 	for (int atom = 0; atom < Natoms; atom++) {             // i 
 

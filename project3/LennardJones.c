@@ -23,7 +23,7 @@ double V(double epsilon, double sigma, size_t N, double** distances) {
            total_energy += VLJ(epsilon, sigma, rij);
        }
    }
-   printf("\nTotal potential energy: %f\n", total_energy);
+   //printf("\nTotal potential energy: %f\n", total_energy);
    return total_energy;
 }
 

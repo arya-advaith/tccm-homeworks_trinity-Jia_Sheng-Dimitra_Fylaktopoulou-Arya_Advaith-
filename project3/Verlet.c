@@ -5,7 +5,7 @@ double** Verlet(
 	double** acceleration_previous,
 	double** acceleration_current) {
 
-	printf("\n-------------start function Verlet-----------------\n");
+	//printf("\n-------------start function Verlet-----------------\n");
 
 	//double epsilon = 0.0661;
 	//double sigma = 0.3345;
@@ -58,7 +58,7 @@ double** Verlet(
 
 
 
-	printf("\n-------------end function Verlet-----------------\n");
+	//printf("\n-------------end function Verlet-----------------\n");
 
 	return coord, velocity, acceleration_previous, acceleration_current;
 

@@ -6,8 +6,8 @@ double T(size_t Natoms,  // Natoms is just variable Natom
 	double** velocity,   // "velocity" is the address of address of a variable
 	double* mass) {      // "mass" is the address of another variable
 
-	printf("\nThis is the function T to calculate total energy\n");
-	printf("Natoms is: %ld\n", Natoms);
+	//printf("\nThis is the function T to calculate total energy\n");
+	//printf("Natoms is: %ld\n", Natoms);
 
  
         double Tsum = 0.0;
@@ -21,16 +21,16 @@ double T(size_t Natoms,  // Natoms is just variable Natom
 	}
         
 
-	printf("The total kinetic energy T is: %f\n", Tsum);
+	//printf("The total kinetic energy T is: %f\n", Tsum);
 	return Tsum;
 }	
 // Function to compute the total energy 
 double E(double Tvalue, double Vvalue) {
-	printf("\nThis function calculate the total energy of the system.\n");
+	//printf("\nThis function calculate the total energy of the system.\n");
 
 	double Energy = Tvalue + Vvalue;
 	
-	printf("The total energy is: %f\n", Energy);
+	//printf("The total energy is: %f\n", Energy);
 	return Energy;
 
 

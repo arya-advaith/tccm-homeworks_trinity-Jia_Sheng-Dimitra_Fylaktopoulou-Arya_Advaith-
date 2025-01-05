@@ -11,6 +11,10 @@
 
 
 int main() {
+
+printf("\nThis MD program simulates the movements of atoms.\n");
+
+
     FILE* input_file = fopen("inp.txt", "r"); //important command to open the file as a reader "r"
     if (input_file == NULL) {
         printf("Error opening file.\n");
@@ -29,7 +33,7 @@ coord,mass=read_molecule(input_file,  N,coord, mass);
 
 fclose(input_file); // important command to close the file
 
-
+printf(".\n.\n.\n.\n.\n ** Calculating trajectories **");
 
 
 // =====================some messy necessary values (initialization) ==============================
@@ -115,7 +119,7 @@ double** acceleration2 = malloc_2d(N, 3);
 
 
 for (int n = 0; n < 1000; n++) {     // This is Verlet loop, 1000 steps 
-printf("step:%d\n",n);
+//printf("step:%d\n",n);
 
 // ----------- 1 compute distance function --------------------
 double** distance = compute_distance(N,coord);
@@ -147,14 +151,14 @@ double Total_E_system = E(T_value, total_energy);  //total_energy = LJ potential
 
 
 	if (n < 1) {
-		printf("This is the initial acceleration, accele_prev is same value");
+		//printf("This is the initial acceleration, accele_prev is same value");
                 
                 // -----------------4  Compute the acceleration -------------------------------------------
                 compute_acc(N, coord, mass, distance, acceleration2, epsilon, sigma);    //acceleration2 is acceleration_current
 
 	}
 	else {
-		printf("This is not initial acceleration, acceleration_prev take last acce value");
+		//printf("This is not initial acceleration, acceleration_prev take last acce value");
 		acceleration1 = acceleration2;    // acceleration_previous = acceleration_current , acceleration take the value before accelertion update
 
                 // -----------------4  Compute the acceleration -------------------------------------------
@@ -174,6 +178,8 @@ Writefile(N, T_value, total_energy, Total_E_system, coord);
 
 }
 
+printf("\n.\n.\n.\n.\n.\n");
+printf("\nThe program is completed. Check the output file output.xyz generated.\n");
 
 
 free_2d(coord);
