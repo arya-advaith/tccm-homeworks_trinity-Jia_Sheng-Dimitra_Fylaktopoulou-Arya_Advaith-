@@ -76,7 +76,7 @@ A description of the project and its structure.
 Test files.
 
 
-The Molecular dynamics for the 3 Argon atoms viewed in Jmol are as follow:
+The Molecular dynamics for the 3 Argon atoms viewed in Jmol after 1000 steps are as follow:
 
 Initial Coordinates
 
