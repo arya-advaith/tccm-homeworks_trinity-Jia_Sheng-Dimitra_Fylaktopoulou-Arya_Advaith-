@@ -76,7 +76,13 @@ A description of the project and its structure.
 Test files.
 
 
+The Molecular dynamics for the 3 Argon atoms viewed in Jmol are as follow:
 
+Initial Coordinates
+![image alt](https://github.com/arya-advaith/tccm-homeworks_trinity-Jia_Sheng-Dimitra_Fylaktopoulou-Arya_Advaith-/blob/79d3fdd45f7aed3cc443565b6fd20f7f22c5266c/MD_initial.png)
+
+Final coordinates
+![image alt](https://github.com/arya-advaith/tccm-homeworks_trinity-Jia_Sheng-Dimitra_Fylaktopoulou-Arya_Advaith-/blob/79d3fdd45f7aed3cc443565b6fd20f7f22c5266c/MD_final.png)
 
 
 
