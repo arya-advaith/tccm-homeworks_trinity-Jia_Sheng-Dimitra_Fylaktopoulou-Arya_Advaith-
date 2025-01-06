@@ -1,8 +1,8 @@
 # Authors
 This project was developed by the following contributors:
 
-1. Arya Advaith
+1. Arya Advaith (60)
 2. SIOW Jia  Sheng (45)
-3. Dimitra Fylaktopoulou
+3. Dimitra Fylaktopoulou (47)
 
 * The authors have done the quantum computing homework, and choosing only one project.
