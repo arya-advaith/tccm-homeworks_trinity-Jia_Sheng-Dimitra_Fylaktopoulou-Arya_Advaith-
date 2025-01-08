@@ -46,7 +46,7 @@ double** Verlet(
 
 	}
 
-	// print to see array
+	// Print the new velocities of the atoms
 	for (int i = 0; i < Natoms; i++) {   // change i, j  to number of Natoms    // i = atom number i                                         // j = x(j0) , y(j1) ,z(j2) component
 		for (int j = 0; j < 3; j++) {
 			//printf("[%d][%d]", i, j);
@@ -59,7 +59,7 @@ double** Verlet(
 
 
 	//printf("\n-------------end function Verlet-----------------\n");
-
+	// Return updated arrays for position, velocity and acceleration
 	return coord, velocity, acceleration_previous, acceleration_current;
 
 }
