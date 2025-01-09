@@ -72,11 +72,9 @@ This license allows you to copy, modify, and restribute the file under the same 
 ### 'README.md'
 A description of the project and its structure.
 
-### 'test.txt', 'test2.txt'
-Test files.
 
 
-The Molecular dynamics for the 3 Argon atoms viewed in Jmol after 1000 steps are as follow:
+The Molecular dynamics for the 3 Argon atoms viewed in Jmol after 1000 steps are as follow diagram:
 
 Initial Coordinates
 
