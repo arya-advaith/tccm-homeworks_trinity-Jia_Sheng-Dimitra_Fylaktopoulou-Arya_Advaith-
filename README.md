@@ -21,7 +21,7 @@ This directory contains files for project 1 not related to our project (project 
 ### 'project2/'
 This directory contains files for project 2 nor related to our project.
 
-### 'project3/'
+### 'project3/' (src directory)
 Contains the core code for the simulation, including the files below.
 
 
